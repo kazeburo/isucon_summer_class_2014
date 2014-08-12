@@ -1,6 +1,6 @@
 Listen 0.0.0.0:5000
 
-<Directory /home/isucon/webapp/php>
+<Directory /home/isu-user/webapp/php>
     Options FollowSymLinks
     AllowOverride All
     Require all granted

@@ -10,7 +10,6 @@ body {
 }
 </style>
 <link rel="stylesheet" href="<: $c.req.uri_for('/css/bootstrap-responsive.min.css') :>">
-<link rel="stylesheet" href="/">
 </head>
 <body>
 <div class="navbar navbar-fixed-top">
