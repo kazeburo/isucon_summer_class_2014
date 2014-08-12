@@ -2,4 +2,5 @@
 webapp/go/app
 webapp/nodejs/node_modules/
 webapp/perl/local/
+webapp/perl/cpanfile.snapshot
 
