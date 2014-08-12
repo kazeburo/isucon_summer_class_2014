@@ -1,5 +1,13 @@
 ISUCON夏期講習サーバの設定など
 
+# サーバ
+
+とりあえず今はここで設定中
+
+http://ec2-54-250-115-149.ap-northeast-1.compute.amazonaws.com/
+
+sshは `ssh ec2-user@ec2-54-250-115-149.ap-northeast-1.compute.amazonaws.com` になる
+
 # setup メモ
 
 ```
