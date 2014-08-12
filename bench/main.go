@@ -34,9 +34,9 @@ const (
 	instanceTypeRequired       = "m3.xlarge"
 	workloadFactor             = 2
 	allowFails                 = 3
-	initialDataDir             = "/opt/isucon/data"
+	initialDataDir             = "/home/isu-user/isucon/bench/data"
 	initialDataMD5             = "4381fd6bb578c8a38e4c55f89eca7166  init.sql.gz\n"
-	initialLoader              = "/opt/isucon/bin/initialloader"
+	initialLoader              = "/home/isu-user/isucon/bench/bin/initialloader"
 	userInitTimeout            = "60"
 	DEBUG                      = true
 )
@@ -47,7 +47,7 @@ var (
 	instanceId   string
 	instanceType string
 	cpuInfo      string
-	seconds      = 60
+	seconds      = 30
 	endpoint     = "http://localhost"
 )
 
