@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use utf8;
 use Kossy;
-
+use DBIx::Sunny;
 
 get '/' => sub {
     my ( $self, $c )  = @_;
@@ -26,7 +26,7 @@ get '/score' => sub {
         score => '-1',
         result => '-',
     } if ! defined $latest;
-    $best_score = -1 if ! defined $best_score
+    $best_score = -1 if ! defined $best_score;
     $c->render_json({
         latest_score => $latest->{score},
         latest_result => $latest->{result},
