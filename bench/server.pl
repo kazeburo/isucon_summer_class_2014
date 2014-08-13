@@ -80,6 +80,7 @@ my $poll = sub {
                     # send
                     $buf = colorstrip($buf);
                     my $chunk = $_json->encode({t=>$buf});
+                    $chunk .= "\n";
                     $chunk .= ' ' x 8000;
                     my $body = sprintf("%x\r\n", length($chunk));
                     $body .= $chunk . "\r\n";

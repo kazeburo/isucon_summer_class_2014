@@ -46,6 +46,7 @@ $(function(){
         location.href = data.location;
       },
       "json"
+    };
   });
   var update_score = function(){
     clearInterval($.polltimer);
@@ -68,16 +69,20 @@ $(function(){
       onloadstart: function() {
         var xhr = this;
         $.polltimer = setInterval(function() {
-          var lines = xhr.responseText.split("\n"),
-            line = lines[lines.length - 2];
-          var obj = $.parseJSON(line);
-          var text = $('#result').text();
-          $('#result').text(text + obj.t);
+          var lines = xhr.responseText.split(/\n/);
+          var text = '';
+          $.each(lines,function(i,val){
+              val = val.replace(/(\n| )+$/,'');
+              if ( val ) { 
+                var obj = $.parseJSON(val);
+                text = text + obj.t;
+              }
+            });
+            $('#result').text(text);
           }, 300);
         }
       },
       success: function() {
-        console.log('finished!');
         setTimeout(update_score, 500);
       }
   });
