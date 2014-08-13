@@ -39,6 +39,7 @@ sub run {
         if ( -f $self->sfile ) {
             warn "Start Benchmark!";
             $self->run_bench();
+            warn "Done Benchmark!";
         }
         sleep 1;
     }
