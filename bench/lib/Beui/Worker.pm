@@ -71,7 +71,7 @@ sub run_bench {
     eval {
         my $dbh = DBIx::Sunny->connect(
             "dbi:mysql:database=isumaster;host=localhost;port=3306",
-            'isu-master', 'isu-master', {
+            'isu-master', 'throwing', {
                 mysql_auto_reconnect => 1,
             },
         );

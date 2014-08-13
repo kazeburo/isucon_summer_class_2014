@@ -101,6 +101,12 @@ GRANT ALL ON isucon.* TO 'isucon'@'%';
 GRANT ALL ON isucon.* TO 'isucon'@'localhost';
 GRANT ALL ON isucon.* TO 'isu-user'@'%';
 GRANT ALL ON isucon.* TO 'isu-user'@'localhost';
+
+CREATE DATABASE isumaster;
+CREATE USER 'isu-master'@'%' IDENTIFIED BY 'throwing';
+CREATE USER 'isu-master'@'localhost' IDENTIFIED BY 'throwing';
+GRANT ALL ON isumaster.* TO 'isu-master'@'localhost';
+GRANT ALL ON isumaster.* TO 'isu-master'@'%';
 ```
 
 ### 起動
