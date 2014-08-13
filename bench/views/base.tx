@@ -35,6 +35,54 @@
 
 <script type="text/javascript" src="<: $c.req.uri_for('/js/jquery.min.js') :>"></script>
 <script type="text/javascript" src="<: $c.req.uri_for('/js/bootstrap.min.js') :>"></script>
+<script>
+$(function(){
+  $('#start').on('click',function(){
+    $('#start').addClass('disabled');
+    $.post(
+      '/start',
+      'dummy=dummy',
+      function(data) {
+        location.href = data.location;
+      },
+      "json"
+  });
+  var update_score = function(){
+    clearInterval($.polltimer);
+    $.get(
+      '/score',
+      '',
+      function(data) {
+        $('#best_score').text(data.best_score);
+        $('#latest_score').text(data.latest_score);
+        $('#latest_result').text(data.latest_result);
+        $('#start').removeClass('disabled');
+      },
+      "json"
+    );
+  };
+  $.ajax({
+    type: 'post',
+    url: '/poll',
+    xhrFields: {
+      onloadstart: function() {
+        var xhr = this;
+        $.polltimer = setInterval(function() {
+          var lines = xhr.responseText.split("\n"),
+            line = lines[lines.length - 2];
+          var obj = $.parseJSON(line);
+          var text = $('#result').text();
+          $('#result').text(text + obj.t);
+          }, 300);
+        }
+      },
+      success: function() {
+        console.log('finished!');
+        setTimeout(update_score, 500);
+      }
+  });
+});
+</script>
 </body>
 </html>
 

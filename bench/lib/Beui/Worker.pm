@@ -82,6 +82,7 @@ sub run_bench {
     };
     warn $@ if $@;
     unlink($self->rfile);
+    unlink($self->sfile);
 }
 
 sub bench {
@@ -101,15 +102,19 @@ sub bench {
         open STDERR, '>&', $logwh
             or die "Died: failed to redirect STDERR\n";
         close $logwh;
-        exec('/bin/bash','./bench.sh');
+        exec('./bench','benchmark','--workload','1','--init','/home/isu-user/isucon/init.sh');
         die "Died: exec failed: $!\n";
     }
     close $logwh;
     my $result;
+    open(my $fh, '>:unix', $self->lfile) or die $!;
+    truncate($fh,0);
     while(<$logrh>){
         warn $_;
+        $fh->print($_);
         $result .= $_;
     }
+    close($fh);
     close $logrh;
     while (wait == -1) {}
     my $exit_code = $?;

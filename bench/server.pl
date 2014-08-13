@@ -31,12 +31,16 @@ my $lfile = "$basedir/data/latest";
 my $_json = JSON::XS->new->utf8;
 my $poll = sub {
     my $env = shift;
-    if ( ! -f $rfile ) {
+    if ( ! -f $rfile && -f $lfile ) {
         open(my $fh, "<", $lfile ) or die "$!";
         my $latest = do { local $/; <$fh> };
         $latest = colorstrip($latest);
         my $json = $_json->encode({t=>$latest});
         return [ 200, [ 'Content-Type'=>'application/json' ], [$json]];
+    }
+    elsif ( ! -f $rfile ) {
+        my $json = $_json->encode({t=>"---"});
+        return [ 200, [ 'Content-Type'=>'application/json' ], [$json]];        
     }
     pipe my $logrh, my $logwh
         or die "Died: failed to create pipe:$!\n";

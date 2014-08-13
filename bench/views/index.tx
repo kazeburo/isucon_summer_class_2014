@@ -12,15 +12,15 @@
       <ul class="list-group">
         <li class="list-group-item">
           <h4 class="list-group-item-heading">最高スコア</h4>
-          <p class="list-group-item-text">ABC</p>
+          <p class="list-group-item-text" id="best_score">-1</p>
         </li>
         <li class="list-group-item">
           <h4 class="list-group-item-heading">最新スコア</h4>
-          <p class="list-group-item-text">ABC</p>
+          <p class="list-group-item-text" id="latest_score">-1</p>
         </li>
         <li class="list-group-item">
-          <h4 class="list-group-item-heading">最新ステータス</h4>
-          <p class="list-group-item-text">SUCCESS</p>
+          <h4 class="list-group-item-heading">最新結果</h4>
+          <p class="list-group-item-text" id="latest_result">-1</p>
         </li>
       </ul>
     </div>
@@ -32,12 +32,12 @@
 
     <div style="text-align:right">
       <div class="btn-group">
-        <button type="button" class="btn btn-warning btn-lg">ベンチマーク開始</button>
+        <button type="button" class="btn btn-warning btn-lg disabled" id="start">ベンチマーク開始</button>
       </div>
     </div>
 
     <h4>最新のベンチマーク結果</h4>
-    <pre>ここに表示されれます</pre>
+    <pre id="result"></pre>
   </div><!--/col-->
 
 </div><!--/row-->
