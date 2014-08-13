@@ -106,6 +106,7 @@ sub bench {
     close $logwh;
     my $result;
     while(<$logrh>){
+        warn $_;
         $result .= $_;
     }
     close $logrh;
