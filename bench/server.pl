@@ -51,7 +51,7 @@ my $poll = sub {
             or die "Died: failed to redirect STDOUT\n";
         close $logwh;
         my @s_opt = $^O eq 'darwin' ? () : ('-s','0.3');
-        exec('tail',@s_opt,'-3000','-f',$lfile);
+        exec('tail',@s_opt,'-n','3000','-f',$lfile);
         die "Died: exec failed: $!\n";
     }
     close $logwh;
