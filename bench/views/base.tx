@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<title>ISUCON夏期講習2014 ベンチマークツール</title>
+<link rel="shortcut icon" href="<: $c.req.uri_for('/favicon.ico') :>" type="image/vnd.microsoft.icon" />
+<link rel="stylesheet" href="<: $c.req.uri_for('/css/bootstrap.min.css') :>">
+<style>
+</style>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<: $c.req.uri_for('/') :>">ISUCON夏期講習2014 ベンチマークツール</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav"><li</ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+
+<div class="container">
+
+: block content -> { }
+
+</div> <!-- /container -->
+
+<script type="text/javascript" src="<: $c.req.uri_for('/js/jquery.min.js') :>"></script>
+<script type="text/javascript" src="<: $c.req.uri_for('/js/bootstrap.min.js') :>"></script>
+</body>
+</html>
+
+

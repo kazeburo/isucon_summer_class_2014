@@ -1,0 +1,45 @@
+: cascade base
+: around content -> {
+
+<div class="row">
+  <div class="col-md-4">
+
+  <div class="panel-group">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">スコア</h4>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading">最高スコア</h4>
+          <p class="list-group-item-text">ABC</p>
+        </li>
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading">最新スコア</h4>
+          <p class="list-group-item-text">ABC</p>
+        </li>
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading">最新ステータス</h4>
+          <p class="list-group-item-text">SUCCESS</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  </div> <!-- col -->
+
+  <div class="col-md-8">
+
+    <div style="text-align:right">
+      <div class="btn-group">
+        <button type="button" class="btn btn-warning btn-lg">ベンチマーク開始</button>
+      </div>
+    </div>
+
+    <h4>最新のベンチマーク結果</h4>
+    <pre>ここに表示されれます</pre>
+  </div><!--/col-->
+
+</div><!--/row-->
+: }
+
