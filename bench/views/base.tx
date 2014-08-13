@@ -63,7 +63,7 @@ $(function(){
     );
   };
   var spre = /\n/;
-  var rere = /[\r ]+$/;
+  var rere = /[\n ]+$/;
   $.ajax({
     type: 'post',
     url: '/poll',
