@@ -6,3 +6,4 @@ requires 'Cwd::Guard';
 requires 'Term::ANSIColor';
 requires 'Proclet';
 requires 'DBIx::Sunny';
+requires 'DBD::mysql';
