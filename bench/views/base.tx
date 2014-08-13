@@ -46,7 +46,7 @@ $(function(){
         location.href = data.location;
       },
       "json"
-    };
+    );
   });
   var update_score = function(){
     clearInterval($.polltimer);
