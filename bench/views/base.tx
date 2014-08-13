@@ -64,6 +64,7 @@ $(function(){
   };
   var spre = /\n/;
   var rere = /[\n ]+$/;
+  $.cl = 0;
   $.ajax({
     type: 'post',
     url: '/poll',
