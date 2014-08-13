@@ -37,6 +37,7 @@ sub run {
     my $self = shift;
     while (1) {
         if ( -f $self->sfile ) {
+            warn "Start Benchmark!";
             $self->run_bench();
         }
         sleep 1;
@@ -57,6 +58,7 @@ sub run_bench {
     close($fhr);
 
     my ($result,$exit_code) = $self->bench();
+    warn "ERR: $result" if $exit_code != 0;
     my %result;
     for my $line (split /\n/, $result) {
         chomp($line);
@@ -83,7 +85,7 @@ sub run_bench {
 
 sub bench {
     my $self = shift;
-    my $guard = cwd_guard($self->datadir);
+    my $guard = cwd_guard($self->{basedir});
     pipe my $logrh, my $logwh
         or die "Died: failed to create pipe:$!\n";
     my $pid = fork;
