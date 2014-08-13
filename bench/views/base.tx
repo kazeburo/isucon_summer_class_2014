@@ -62,6 +62,8 @@ $(function(){
       "json"
     );
   };
+  var spre = /\n/;
+  var rere = /[\r ]+$/;
   $.ajax({
     type: 'post',
     url: '/poll',
@@ -74,7 +76,7 @@ $(function(){
           var text = '';
           $.each(lines,function(i,val){
             if ( i >= $.cl ) {
-              val = val.replace(re,'');
+              val = val.replace(rere,'');
               if ( val ) { 
                 var obj = $.parseJSON(val);
                 text = text + obj.t;
