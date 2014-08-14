@@ -6,6 +6,7 @@ use utf8;
 use Cwd::Guard qw/cwd_guard/;
 use Term::ANSIColor qw/colorstrip/;
 use DBIx::Sunny;
+use Guard;
 
 sub new {
     my ($class, $base) = @_;
@@ -58,6 +59,11 @@ sub run_bench {
     $fhr->print(1);
     close($fhr);
 
+    my $guard = guard {
+        unlink($self->rfile);
+        unlink($self->sfile);
+    };
+
     my ($result,$exit_code) = $self->bench();
     warn "ERR: $result" if $exit_code != 0;
     my %result;
@@ -81,8 +87,6 @@ sub run_bench {
         $dbh->query('insert into benchlog (result,score) VALUES (?,?)', $result{Result}, $result{Score});
     };
     warn $@ if $@;
-    unlink($self->rfile);
-    unlink($self->sfile);
 }
 
 sub bench {
