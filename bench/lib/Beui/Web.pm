@@ -6,31 +6,41 @@ use utf8;
 use Kossy;
 use DBIx::Sunny;
 
-get '/' => sub {
+filter 'score' => sub {
+    my ($app) = @_;
+    sub {
+        my ($self, $c) = @_;
+        my $dbh = DBIx::Sunny->connect(
+            "dbi:mysql:database=isumaster;host=localhost;port=3306",
+            'isu-master', 'throwing', {
+                mysql_auto_reconnect => 1,
+            },
+        );
+        my $latest = $dbh->select_row('SELECT * FROM benchlog ORDER BY created_at DESC LIMIT 1');
+        my $best_score = $dbh->select_one('SELECT MAX(score) FROM benchlog');
+        $latest = { 
+            score => '-1',
+            result => '-',
+        } if ! defined $latest;
+        $best_score = -1 if ! defined $best_score;
+        $c->stash->{latest} = $latest;
+        $c->stash->{best_score} = $best_score;
+        $app->($self, $c);
+    };
+};
+
+get '/' => [qw/score/] => sub {
     my ( $self, $c )  = @_;
     $c->render('index.tx');
 };
 
-get '/score' => sub {
+get '/score' => [qw/score/] => sub {
     my ( $self, $c )  = @_;
 
-    my $dbh = DBIx::Sunny->connect(
-        "dbi:mysql:database=isumaster;host=localhost;port=3306",
-        'isu-master', 'throwing', {
-            mysql_auto_reconnect => 1,
-        },
-    );
-    my $latest = $dbh->select_row('SELECT * FROM benchlog ORDER BY created_at DESC LIMIT 1');
-    my $best_score = $dbh->select_one('SELECT MAX(score) FROM benchlog');
-    $latest = { 
-        score => '-1',
-        result => '-',
-    } if ! defined $latest;
-    $best_score = -1 if ! defined $best_score;
     $c->render_json({
-        latest_score => $latest->{score},
-        latest_result => $latest->{result},
-        best_score => $best_score
+        latest_score => $c->stash->{latest}->{score},
+        latest_result => $c->stash->{latest}->{result},
+        best_score => $c->stash->{best_score}
     });
 };
 

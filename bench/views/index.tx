@@ -12,15 +12,15 @@
       <ul class="list-group">
         <li class="list-group-item">
           <h4 class="list-group-item-heading">最高スコア</h4>
-          <p class="list-group-item-text" id="best_score">-1</p>
+          <p class="list-group-item-text" id="best_score"><: $c.stash.best_score :></p>
         </li>
         <li class="list-group-item">
           <h4 class="list-group-item-heading">最新スコア</h4>
-          <p class="list-group-item-text" id="latest_score">-1</p>
+          <p class="list-group-item-text" id="latest_score"><: $c.stash.latest_score :></p>
         </li>
         <li class="list-group-item">
           <h4 class="list-group-item-heading">最新結果</h4>
-          <p class="list-group-item-text" id="latest_result">-1</p>
+          <p class="list-group-item-text" id="latest_result"><: $c.stash.latest_result :></p>
         </li>
       </ul>
     </div>
