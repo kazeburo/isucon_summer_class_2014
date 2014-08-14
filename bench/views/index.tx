@@ -38,6 +38,101 @@
 
     <h4><img src="/img/loading.gif" width="19" height="19" id="loading" style="vertical-align: baseline" /> 最新のベンチマーク結果</h4>
     <pre id="result"></pre>
+
+    <br />
+    <br />
+    <p style="text-align:center"><img src="/img/3d4d9527.png" /></p>
+    <br />
+    <br />
+
+
+    <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">ドキュメント</h3>
+    </div>
+    <div class="panel-body">
+
+    <h3>SSH接続の方法</h3>
+    <p>サーバへSSHするには以下のように接続をしてください</p>
+
+    <pre>
+$ ssh -p 22321 isu-user@<: $c.req.uri_for('/').host :>
+</pre>
+
+    <p>ポートは「22321」、ユーザ名は「isu-user」です。認証はパスワード認証になります。手元のシートに書かれているパスワードを入力してログインしてください</p>
+
+     <hr />
+
+     <h3>サーバ環境</h3>
+     <p>EC2環境にて、Amazon Linuxをセットアップし、MySQLや各言語のインタプリタもインストールしてあります。</>
+     <p>また、「isu-user」にてログインすると、ホームディレクトリに「isucon」ディレクトリがあります。アプリケーションのコードは「~/isucon/webapp」以下にあります</p>
+
+     <hr />
+
+     <h3>実装言語の切り替え</h3>
+
+     <p>TCP Port 80でApacheが起動し、Port 5000でWebアプリケーションがsupervisord経由で起動されています。初期設定では Perl の実装が起動しています。実装を切り替えるには「~/isucon/run.ini」を編集します。</p>
+     <pre>
+[program:isucon_perl]
+directory=/home/isu-user/isucon/webapp/perl
+command=/home/isu-user/isucon/env.sh carton exec -- plackup -s Starman --workers 10 --port 5000 -E production --disable-keepalive app.psgi
+user=isu-user
+stdout_logfile=/tmp/isucon.perl.log
+stderr_logfile=/tmp/isucon.perl.log
+autostart=true ←ここを変更する
+
+[program:isucon_node]
+directory=/home/isu-user/isucon/webapp/nodejs
+command=/home/isu-user/isucon/env.sh node server.js
+user=isu-user
+stdout_logfile=/tmp/isucon.node.log
+stderr_logfile=/tmp/isucon.node.log
+stopsignal=INT
+autostart=false ←ここを変更する
+</pre>
+
+     <p>node.js実装に切り替えるには perl実装の autostartをfalseにし、node実装のautostartをtrueにして保存します。その後supervisordをreloadします</p>
+
+     <pre>
+$ sudo supervisorctl reload
+</pre>
+     <p>以上で実装が切り割ります。アプリケーションを再起動する場合は上のreloadコマンドか</p>
+
+     <pre>
+$ sudo supervisorctl restart isucon_${実装名}
+</pre>
+
+     <p>としてください</p>
+
+     <p>PHP実装のみ他言語と起動方法が異なるため、「~/isucon/webapp/php/README.md」 を参照してください</p>
+
+     <hr />
+
+     <h3>データベースについて</h3>
+
+     <p>MySQLが動作しています。MySQLのログインは</p>
+     <ul>
+       <li>ユーザ名「isu-user」、パスワードなし</li>
+       <li>ユーザ名「isucon」、パスワードなし</li>
+       <li>ユーザ名「root」、パスワードなし</li>
+     </ul>
+
+     <p>このいずれでも出来ます</p>
+
+     <pre>
+$ mysql -u isu-user isucon
+</pre>
+
+     <hr />
+
+     <h3>ベンチマークの設定と実行</h3>
+
+     <p>ベンチマークの実行は上の「ベンチマーク開始」ボタンをクリックしてください。1回のベンチマークに1分程度かかります</p>
+     <p>ベンチマークを開始するとまず、データベースの初期化が行われます。その後アプリケーションに対してアクセスをします。データベースの初期化のあとにインデックスの作成などを行いたい場合は、「~/isucon/init.sh」に書いてください</p>
+
+     </div>
+     </div>
+
   </div><!--/col-->
 
 </div><!--/row-->
