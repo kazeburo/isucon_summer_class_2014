@@ -39,6 +39,7 @@
 $(function(){
   $('#start').on('click',function(){
     $('#start').addClass('disabled');
+    $('#loading').attr('src','/img/loading.gif');
     $.post(
       '/start',
       'dummy=dummy',
@@ -50,6 +51,7 @@ $(function(){
   });
   var update_score = function(){
     clearInterval($.polltimer);
+    $('#loading').attr('src','/img/rest1.gif');
     $.get(
       '/score',
       '',

@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <h4>最新のベンチマーク結果</h4>
+    <h4><img src="/img/loading.gif" width="19" height="19" id="loading" style="vertical-align: baseline" /> 最新のベンチマーク結果</h4>
     <pre id="result"></pre>
   </div><!--/col-->
 
