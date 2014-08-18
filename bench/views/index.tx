@@ -96,7 +96,7 @@ autostart=true ←ここを変更する
      <pre>
 $ sudo supervisorctl reload
 </pre>
-     <p>以上で実装が切り割ります。アプリケーションを再起動する場合は上のreloadコマンドか</p>
+     <p>以上で実装が切り替わります。アプリケーションを再起動する場合は上のreloadコマンドか</p>
 
      <pre>
 $ sudo supervisorctl restart isucon_${実装名}
