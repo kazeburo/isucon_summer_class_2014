@@ -71,16 +71,8 @@ $ ssh -p 22321 isu-user@<: $c.req.uri_for('/').host :>
 
      <h3>実装言語の切り替え</h3>
 
-     <p>TCP Port 80でApacheが起動し、Port 5000でWebアプリケーションがsupervisord経由で起動されています。初期設定では Perl の実装が起動しています。実装を切り替えるには「~/isucon/run.ini」を編集します。</p>
+     <p>TCP Port 80でApacheが起動し、Port 5000でWebアプリケーションがsupervisord経由で起動されています。初期設定では Ruby の実装が起動しています。実装を切り替えるには「~/isucon/run.ini」を編集します。</p>
      <pre>
-[program:isucon_perl]
-directory=/home/isu-user/isucon/webapp/perl
-command=/home/isu-user/isucon/env.sh carton exec -- plackup -s Starman --workers 10 --port 5000 -E production --disable-keepalive app.psgi
-user=isu-user
-stdout_logfile=/tmp/isucon.perl.log
-stderr_logfile=/tmp/isucon.perl.log
-autostart=true ←ここを変更する
-
 [program:isucon_node]
 directory=/home/isu-user/isucon/webapp/nodejs
 command=/home/isu-user/isucon/env.sh node server.js
@@ -89,9 +81,17 @@ stdout_logfile=/tmp/isucon.node.log
 stderr_logfile=/tmp/isucon.node.log
 stopsignal=INT
 autostart=false ←ここを変更する
+
+[program:isucon_ruby]
+directory=/home/isu-user/isucon/webapp/ruby
+command=/home/isu-user/isucon/env.sh bundle exec foreman start
+user=isu-user
+stdout_logfile=/tmp/isucon.ruby.log
+stderr_logfile=/tmp/isucon.ruby.log
+autostart=true ←ここを変更する
 </pre>
 
-     <p>node.js実装に切り替えるには perl実装の autostartをfalseにし、node実装のautostartをtrueにして保存します。その後supervisordをreloadします</p>
+     <p>node.js実装に切り替えるには Ruby実装の autostartをfalseにし、node実装のautostartをtrueにして保存します。その後supervisordをreloadします</p>
 
      <pre>
 $ sudo supervisorctl reload
