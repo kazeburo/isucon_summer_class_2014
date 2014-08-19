@@ -253,7 +253,7 @@ func (c *Client) Crawl(endpoint string, seconds int) (result *Result) {
 
 		endpoint_url, _ := url.Parse(endpoint)
 		for _, cookie := range c.Client.Jar.Cookies(endpoint_url) {
-			if m, _ := regexp.MatchString("^isucon_session",cookie.Name); m {
+			if m, _ := regexp.MatchString("^isucon_session",cookie.Name); !m {
 				c.Fail("invalid cookie.name=%s", cookie.Name)
 			}
 		}
