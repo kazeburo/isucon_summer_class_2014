@@ -8,7 +8,7 @@ require_once 'limonade/lib/limonade.php';
 function configure()
 {
     option('base_uri', '');
-    option('session', 'isucon_session');
+    option('session', 'isucon_session_phpxxx');
  
     $env = getenv('ISUCON_ENV');
     if (!$env) $env = 'local';

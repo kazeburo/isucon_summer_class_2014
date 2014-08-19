@@ -10,7 +10,7 @@ require 'tempfile'
 class Isucon3App < Sinatra::Base
   $stdout.sync = true
   use Rack::Session::Dalli, {
-    :key => 'isucon_session',
+    :key => 'isucon_session_rubyxx',
     :cache => Dalli::Client.new('localhost:11211')
   }
 

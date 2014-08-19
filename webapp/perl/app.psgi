@@ -24,7 +24,7 @@ builder {
         ),
         state => Plack::Session::State::Cookie->new(
             httponly    => 1,
-            session_key => "isucon_session",
+            session_key => "isucon_session_perlxx",
         ),
     ;
     $app;

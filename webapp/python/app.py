@@ -24,7 +24,7 @@ config = {}
 app = Flask(__name__, static_url_path='')
 app.cache = memcache.Client(['localhost:11211'], debug=0)
 app.session_interface = Session()
-app.session_cookie_name = "isucon_session"
+app.session_cookie_name = "isucon_session_python"
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
 def load_config():

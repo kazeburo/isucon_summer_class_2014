@@ -25,7 +25,7 @@ const (
 	maxConnectionCount = 256
 	memosPerPage       = 100
 	listenAddr         = ":5000"
-	sessionName        = "isucon_session"
+	sessionName        = "isucon_session_golang"
 	tmpDir             = "/tmp/"
 	markdownCommand    = "../bin/markdown"
 	dbConnPoolSize     = 10

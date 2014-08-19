@@ -54,7 +54,7 @@ if (cluster.isMaster) {
         app.use(express.cookieParser());
         app.use(express.session({
             secret: 'powawa',
-            key: 'isucon_session',
+            key: 'isucon_session_nodejs',
             store: new MemcachedStore({
                 hosts: [ 'localhost:11211' ]
             })
